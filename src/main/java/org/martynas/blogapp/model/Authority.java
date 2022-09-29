@@ -1,12 +1,11 @@
 package org.martynas.blogapp.model;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-@Data
+
 @Entity
 @Table(name = "authorities")
 @SequenceGenerator(name = "authority_seq_gen", sequenceName = "authority_seq", initialValue = 10, allocationSize = 1)
@@ -28,6 +27,31 @@ public class Authority implements GrantedAuthority {
 //    )
     @ManyToMany(mappedBy = "authorities", cascade = CascadeType.ALL)
     private Collection<BlogUser> users;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    public Collection<BlogUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<BlogUser> users) {
+        this.users = users;
+    }
 
     @Override
     public String toString() {
